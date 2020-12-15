@@ -24,6 +24,7 @@ public class Enemy extends PApplet {
         this.detected = detected;
     }
 
+    //enemy movement and attack is handled here
     public void enemyAI(int playerX, int playerY){
         if(playerX == ex && playerY < ey && canU && !eCanAttack && detected){
             ey -= 1;

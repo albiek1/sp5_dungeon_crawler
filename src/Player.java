@@ -1,3 +1,5 @@
+//for storing player variables
+//no funktions are called from here at the moment
 public class Player {
     int px, py, pH, pHmax, pRange, pAtk;
     boolean canL, canR, canU, canD, canUL, canUR, canDL, canDR;

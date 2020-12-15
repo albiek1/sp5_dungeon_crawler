@@ -32,6 +32,7 @@ public class dungeon_main extends PApplet {
             true, true, true, true,
             true, true, true, true,
             false);*/
+    // the entire board is set up here with for loops for boarder and random walls
     public void settings() {
         fullScreen();
         grid = new Tile[mSizeX][mSizeY];
@@ -40,9 +41,9 @@ public class dungeon_main extends PApplet {
                 grid[x][y] = new Tile(false, false, false, x * 50, y * 50);
             }
         }
-        grid[3][3].occupied = true;
-        grid[3][4].occupied = true;
-        grid[4][3].occupied = true;
+        //grid[3][3].occupied = true;
+        //grid[3][4].occupied = true;
+        //grid[4][3].occupied = true;
         for (int x = 0; x < mSizeX; x++) {
             grid[x][0].occupied = true;
             grid[x][mSizeY - 1].occupied = true;
@@ -51,7 +52,7 @@ public class dungeon_main extends PApplet {
             grid[0][y].occupied = true;
             grid[mSizeX - 1][y].occupied = true;
         }
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 9; i++){
                 int temp1 = 0;
                 int temp2 = 0;
                 while(grid[temp1][temp2].occupied || grid[temp1][temp2].hasPlayer){
@@ -77,6 +78,7 @@ public class dungeon_main extends PApplet {
         PApplet.main("dungeon_main", args);
     }
 
+    //main code draws everything. code crashes when shapes are stored in other classes :/
     public void draw() {
         background(255);
         for (int y = 0; y < mSizeY; y++) {
@@ -133,6 +135,8 @@ public class dungeon_main extends PApplet {
         text("HP: "+p.pH+"/"+p.pHmax, width/2, 20);
     }
 
+    //occasional overlapping of enemies and walls
+    //this is meant to fix that (doesn't work completely)
     public void unStickEnemies(){
         for(int i = enemyArrayList.size()-1; i >= 0; i--){
             Enemy e = enemyArrayList.get(i);
@@ -162,6 +166,7 @@ public class dungeon_main extends PApplet {
         }
     }
 
+    //enemy movement script checks where it can move to
     public void EcanMove() {
         for (int i = enemyArrayList.size() - 1; i >= 0; i--) {
             Enemy e = enemyArrayList.get(i);
@@ -180,6 +185,7 @@ public class dungeon_main extends PApplet {
         }
     }
 
+    //player movement script checks where player can move
     public void PcanMove() {
         for (int i = enemyArrayList.size() - 1; i >= 0; i--) {
             Enemy e = enemyArrayList.get(i);
@@ -198,6 +204,7 @@ public class dungeon_main extends PApplet {
         }
     }
 
+    //player movement, ai turns, and attacks are handled here
     public void mousePressed() {
         Enemy e1 = enemyArrayList.get(0);
         Enemy e2 = enemyArrayList.get(1);

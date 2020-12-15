@@ -1,7 +1,12 @@
 //to do:
+// fix enemy placement
+// add items
+// fix hits not registering
+// proper random layout
+// levels + stats
+// clean code
 
 import processing.core.PApplet;
-
 import java.util.ArrayList;
 
 public class dungeon_main extends PApplet {

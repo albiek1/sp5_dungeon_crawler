@@ -28,10 +28,6 @@ public class dungeon_main extends PApplet {
             true, true, true, true,
             true, true, true, true);
 
-    /*Enemy e = new Enemy(ex, ey, eH, eHmax, eRange,
-            true, true, true, true,
-            true, true, true, true,
-            false);*/
     // the entire board is set up here with for loops for boarder and random walls
     public void settings() {
         fullScreen();
@@ -41,9 +37,6 @@ public class dungeon_main extends PApplet {
                 grid[x][y] = new Tile(false, false, false, x * 50, y * 50);
             }
         }
-        //grid[3][3].occupied = true;
-        //grid[3][4].occupied = true;
-        //grid[4][3].occupied = true;
         for (int x = 0; x < mSizeX; x++) {
             grid[x][0].occupied = true;
             grid[x][mSizeY - 1].occupied = true;
@@ -61,17 +54,6 @@ public class dungeon_main extends PApplet {
                 }
                 grid[temp1][temp2].occupied = true;
         }
-        /*for (int i = 0; i < 2; i++) {
-            int t1 = 0;
-            int t2 = 0;
-            while (grid[t1][t2].occupied || grid[t1][t2].hasEnemy) {
-                t1 = round(random(mSizeX - 1));
-                t2 = round(random(mSizeY - 1));
-                System.out.println(t1 + ", " + t2);
-            }
-            enemyArrayList.add(new Enemy(t1, t2, eH, eHmax, eRange, true, true, true, true, true, true, true, true, false, false));
-            grid[t1][t2].hasEnemy = true;
-        }*/
     }
 
     public static void main(String[] args) {
@@ -193,10 +175,10 @@ public class dungeon_main extends PApplet {
             p.canU = !grid[p.px][p.py - 1].occupied && !grid[p.px][p.py - 1].hasEnemy;
             p.canR = !grid[p.px + 1][p.py].occupied && !grid[p.px + 1][p.py].hasEnemy;
             p.canL = !grid[p.px - 1][p.py].occupied && !grid[p.px - 1][p.py].hasEnemy;
-            p.canUL = !grid[p.px - 1][p.py - 1].occupied && !grid[p.px - 1][p.py - 1].hasEnemy;
-            p.canUR = !grid[p.px + 1][p.py - 1].occupied && !grid[p.px + 1][p.py - 1].hasEnemy;
-            p.canDL = !grid[p.px - 1][p.py + 1].occupied && !grid[p.px - 1][p.py + 1].hasEnemy;
-            p.canDR = !grid[p.px + 1][p.py + 1].occupied && !grid[p.px + 1][p.py + 1].hasEnemy;
+            p.canUL = !grid[p.px - 1][p.py - 1].occupied && !grid[p.px - 1][p.py - 1].hasEnemy && !(grid[p.px-1][p.py].occupied && grid[p.px][p.py-1].occupied);
+            p.canUR = !grid[p.px + 1][p.py - 1].occupied && !grid[p.px + 1][p.py - 1].hasEnemy && !(grid[p.px+1][p.py].occupied && grid[p.px][p.py-1].occupied);
+            p.canDL = !grid[p.px - 1][p.py + 1].occupied && !grid[p.px - 1][p.py + 1].hasEnemy && !(grid[p.px-1][p.py].occupied && grid[p.px][p.py+1].occupied);
+            p.canDR = !grid[p.px + 1][p.py + 1].occupied && !grid[p.px + 1][p.py + 1].hasEnemy && !(grid[p.px+1][p.py].occupied && grid[p.px][p.py+1].occupied);
             if (!grid[p.px][p.py].hasPlayer) {
                 grid[p.px][p.py].hasPlayer = true;
             }
